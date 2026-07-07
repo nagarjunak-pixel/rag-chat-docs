@@ -114,10 +114,23 @@ class VectorStore:
         # WHY get_or_create? If the collection already exists (from a previous run),
         # we use it. If not, we create it. This makes the system idempotent —
         # you can run "ingest" multiple times without errors.
-        self.collection = self.client.get_or_create_collection(
-            name="documents",
-            metadata={"description": "RAG document chunks with embeddings"}
-        )
+        #
+        # WHY cosine distance? Chroma defaults to L2 (squared euclidean) distance,
+        # which gives raw distances of 100+ — meaningless for "relevance score".
+        # Cosine distance ranges 0-2, where 0 = identical, 1 = unrelated, 2 = opposite.
+        # We convert to a 0-1 score where 1 = perfect match.
+        try:
+            self.collection = self.client.get_or_create_collection(
+                name="documents",
+                metadata={"hnsw:space": "cosine"}
+            )
+        except Exception:
+            # Collection might exist with different metadata — delete and recreate
+            self.client.delete_collection("documents")
+            self.collection = self.client.get_or_create_collection(
+                name="documents",
+                metadata={"hnsw:space": "cosine"}
+            )
         print(f"  💾 Vector store ready — path: {db_path}")
         print(f"     Current chunks in store: {self.collection.count()}")
     
@@ -140,7 +153,7 @@ class VectorStore:
         texts = []
         
         for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
-            ids.append(f"{chunk['source']}_chunk_{chunk['chunk_index']}")
+            ids.append(f"{chunk['source']}_p{chunk['page']}_chunk_{chunk['chunk_index']}")
             metadatas.append({
                 "source": chunk["source"],
                 "page": chunk["page"],
@@ -196,8 +209,10 @@ class VectorStore:
                 "source": results["metadatas"][0][i]["source"],
                 "page": results["metadatas"][0][i]["page"],
                 # WHY convert distance to score? Chroma returns "distance" (lower = closer).
-                # We flip it so "score" means "higher = better" which is more intuitive.
-                "score": 1 - results["distances"][0][i]
+                # With cosine distance: 0 = identical, 1 = unrelated, 2 = opposite.
+                # We convert to a 0-1 score where 1 = perfect match, 0 = no match.
+                # Formula: score = 1 - (distance / 2) → cosine distance 0 → score 1.0
+                "score": 1 - (results["distances"][0][i] / 2)
             })
         
         return matched
@@ -205,7 +220,10 @@ class VectorStore:
     def clear(self):
         """Delete all stored chunks. WHY? For re-ingesting fresh documents."""
         self.client.delete_collection("documents")
-        self.collection = self.client.get_or_create_collection(name="documents")
+        self.collection = self.client.get_or_create_collection(
+            name="documents",
+            metadata={"hnsw:space": "cosine"}
+        )
         print("  🗑️  Cleared vector store")
 
 

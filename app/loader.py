@@ -69,7 +69,8 @@ def load_documents(folder_path: str) -> List[Dict]:
             # WHY page-by-page? So we can cite the exact page later.
             # If we dumped all pages into one string, we'd lose page-level citations.
             doc = fitz.open(filepath)
-            for page_num in range(len(doc)):
+            page_count = len(doc)  # WHY store before close? Can't access len(doc) after doc.close()
+            for page_num in range(page_count):
                 text = doc[page_num].get_text()
                 if text.strip():  # Skip empty pages
                     documents.append({
@@ -78,7 +79,7 @@ def load_documents(folder_path: str) -> List[Dict]:
                         "page": page_num + 1  # WHY +1? Pages are 1-indexed for humans
                     })
             doc.close()
-            print(f"     ✓ {filepath.name} — {len(doc)} page(s)")
+            print(f"     ✓ {filepath.name} — {page_count} page(s)")
         else:
             # Text files: read the whole thing as one "page"
             text = filepath.read_text(encoding="utf-8", errors="ignore")
