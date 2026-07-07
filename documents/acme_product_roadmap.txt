@@ -1,0 +1,70 @@
+ACME Tech Startup — Product Roadmap 2026
+
+Vision
+Our vision is to become the leading AI automation platform for SMBs in India by end of 2026.
+We want to make AI as easy to use as email — no code, no data scientists, no expensive consultants.
+
+Product Pillars for 2026
+1. AI Agents — Autonomous agents that can handle multi-step business workflows
+2. Integrations — Connect with 200+ business tools (CRM, accounting, HR, marketing)
+3. Intelligence Layer — Custom AI models trained on each customer's data
+4. Marketplace — Third-party developers can build and sell AI tools on our platform
+
+Q1 2026 Releases
+February: Enterprise AI Agent Platform (code name: "Pilot")
+- Multi-agent orchestration with visual builder
+- Support for 15+ languages including Hindi, Telugu, Tamil
+- Integration with Salesforce, HubSpot, Zoho CRM
+- Starting price: Rs 50,000/month
+
+March: Document Intelligence API
+- Extract structured data from invoices, receipts, contracts
+- 95% accuracy on standard document formats
+- API access: Rs 0.50 per page processed
+
+Q2 2026 Releases
+April: Voice AI Assistant
+- Telugu and Hindi voice support
+- Can handle customer support calls automatically
+- Integrates with existing IVR systems
+
+May: Predictive Analytics Dashboard
+- Revenue forecasting using ML models
+- Customer churn prediction
+- Automatic anomaly detection in business metrics
+
+June: AI Code Reviewer
+- Review Python, JavaScript, Java code
+- Security vulnerability detection
+- Code quality scoring and suggestions
+
+Technical Architecture
+- Backend: Python FastAPI, PostgreSQL, Redis
+- AI Models: Mix of cloud (OpenAI, Anthropic) and local (Ollama, vLLM)
+- Infrastructure: AWS EC2 (primary), GCP (backup)
+- Vector Database: Chroma for document search, Pinecone for production scale
+
+Pricing Strategy 2026
+We are moving to usage-based pricing for enterprise customers:
+- Base platform fee: Rs 50,000/month
+- Per-agent fee: Rs 5,000/month per active agent
+- API calls: Rs 0.10 per 1000 calls
+- Document processing: Rs 0.50 per page
+Estimated average enterprise contract: Rs 1.5 lakhs/month
+
+Competitive Landscape
+Main competitors:
+1. Zapier — automation but no native AI
+2. UiPath — enterprise RPA, expensive, no AI agents
+3. Local Indian startups (3-4 small players) — limited features
+
+Our advantages:
+- AI-native (built from ground up with AI, not bolted on)
+- India-first (local language support, local pricing)
+- SMB-friendly (no enterprise contract complexity)
+
+Target Metrics for 2026
+- 2,000 subscribers by end of 2026 (from 637 in Q4 2025)
+- Rs 2 crores annual revenue run rate
+- Expand to 3 cities: Hyderabad, Bangalore, Mumbai
+- Launch marketplace with 50+ third-party AI tools

@@ -1,0 +1,57 @@
+ACME Tech Startup — Business Report Q4 2025
+
+Company Overview
+ACME Tech is a SaaS company founded in 2023, headquartered in Hyderabad, India.
+We build AI-powered automation tools for small and medium businesses.
+Our mission is to make AI accessible to companies that can't afford dedicated AI teams.
+
+Revenue Model
+Our revenue model is based on monthly subscription fees. We offer three tiers:
+- Starter: Rs 2,000/month for up to 5 users
+- Pro: Rs 8,000/month for up to 25 users
+- Enterprise: Rs 25,000/month for unlimited users
+All plans include a 14-day free trial. No setup fees.
+
+Q4 2025 Financial Results
+Total revenue for Q4 2025 was Rs 45 lakhs, up 35% year-over-year.
+This exceeded our target of Rs 40 lakhs by 12.5%.
+The breakdown by tier:
+- Starter tier: Rs 12 lakhs (267 subscribers)
+- Pro tier: Rs 28 lakhs (350 subscribers)
+- Enterprise tier: Rs 5 lakhs (20 subscribers)
+
+Customer Metrics
+We ended Q4 with 637 active subscribers, up from 410 in Q3.
+Customer churn rate decreased to 4.2% (down from 6.1% in Q3).
+Net Promoter Score improved to 52 (up from 41 in Q3).
+Average revenue per user (ARPU) is Rs 706/month.
+
+Product Updates in Q4
+We launched three major features in Q4:
+1. AI Document Analyzer — extracts data from PDFs and images
+2. Workflow Builder — visual drag-and-drop automation builder
+3. API Marketplace — third-party integrations with 50+ services
+
+Marketing Spend
+Total marketing spend in Q4 was Rs 8 lakhs, representing 17.8% of revenue.
+Breakdown:
+- Digital ads: Rs 4.5 lakhs (Google Ads, LinkedIn, Twitter)
+- Content marketing: Rs 2 lakhs (blog, YouTube, case studies)
+- Events: Rs 1.5 lakhs (startup conferences, trade shows)
+
+Team and Hiring
+We grew from 18 to 27 employees in Q4.
+Key hires: 2 ML engineers, 1 product designer, 3 sales executives, 1 HR manager.
+Current open positions: Senior Backend Engineer, DevOps Lead, Marketing Manager.
+
+Q1 2026 Plans
+We plan to launch our enterprise AI agent platform in February 2026.
+Target revenue for Q1 2026: Rs 60 lakhs.
+Planning to hire 8 more engineers and open a sales office in Bangalore.
+Board approved a 20% increase in marketing budget for Q1 2026.
+
+Challenges and Risks
+1. Competition from larger SaaS companies entering the AI space
+2. Customer acquisition cost has risen 15% in the last 6 months
+3. Need to scale infrastructure to handle 10x growth projected for 2026
+4. Talent retention risk — two competitors are hiring aggressively in Hyderabad
