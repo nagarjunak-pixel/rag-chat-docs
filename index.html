@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chat with Documents — Surya Agentic Academy</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+            color: #e0e0e0; min-height: 100vh; line-height: 1.6;
+        }
+        .hero {
+            text-align: center; padding: 60px 20px 40px;
+        }
+        .hero h1 {
+            font-size: 36px; background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .hero p { color: #888; font-size: 16px; max-width: 600px; margin: 0 auto 20px; }
+        .badge {
+            display: inline-block; background: #1e1e30; border: 1px solid #2a2a40;
+            padding: 5px 15px; border-radius: 15px; font-size: 13px; color: #aaa; margin: 5px;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+        .section { margin-bottom: 40px; }
+        .section h2 {
+            font-size: 24px; color: #fff; margin-bottom: 15px;
+            border-bottom: 1px solid #2a2a40; padding-bottom: 10px;
+        }
+        .architecture {
+            background: #1a1a2e; border-radius: 15px; border: 1px solid #2a2a40;
+            padding: 25px; font-family: 'Courier New', monospace; font-size: 14px;
+            overflow-x: auto; line-height: 1.8; color: #aaa;
+        }
+        .arch-step { color: #667eea; font-weight: bold; }
+        .arch-arrow { color: #764ba2; }
+        .modules {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .module {
+            background: #1e1e30; border: 1px solid #2a2a40; border-radius: 10px;
+            padding: 20px; transition: transform 0.2s;
+        }
+        .module:hover { transform: translateY(-3px); border-color: #667eea; }
+        .module .num { font-size: 28px; font-weight: bold; color: #667eea; }
+        .module .name { font-size: 16px; font-weight: bold; color: #fff; margin: 5px 0; }
+        .module .file { font-family: monospace; font-size: 13px; color: #764ba2; }
+        .module .desc { font-size: 13px; color: #999; margin-top: 8px; }
+        .concept {
+            background: #1e1e30; border-left: 3px solid #667eea;
+            padding: 15px 20px; border-radius: 0 10px 10px 0; margin-bottom: 15px;
+        }
+        .concept strong { color: #667eea; }
+        .code-block {
+            background: #0d0d1a; border: 1px solid #2a2a40; border-radius: 10px;
+            padding: 20px; font-family: monospace; font-size: 13px;
+            color: #aaa; margin: 10px 0; overflow-x: auto;
+        }
+        .code-block .comment { color: #555; }
+        .links {
+            display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 30px 0;
+        }
+        .link-btn {
+            display: inline-block; padding: 12px 30px; border-radius: 25px;
+            text-decoration: none; font-size: 15px; transition: opacity 0.3s;
+        }
+        .link-btn.github {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .link-btn:hover { opacity: 0.9; }
+        .footer {
+            text-align: center; padding: 30px 20px; color: #555; font-size: 13px;
+            border-top: 1px solid #2a2a40;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>📚 RAG Chat with Documents</h1>
+        <p>A complete Retrieval-Augmented Generation system built from scratch — no frameworks, no black boxes. Every line of code is teaching material.</p>
+        <div>
+            <span class="badge">🧠 Python</span>
+            <span class="badge">🔢 Ollama Embeddings</span>
+            <span class="badge">💾 Chroma Vector DB</span>
+            <span class="badge">🌐 FastAPI</span>
+            <span class="badge">🤖 GLM-5.2 Cloud</span>
+        </div>
+        <div class="links">
+            <a href="https://github.com/nagarjunak-pixel/rag-chat-docs" class="link-btn github">📦 View on GitHub</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>🏗️ Architecture — How RAG Works</h2>
+            <div class="architecture">
+<span class="arch-step">INGEST</span> (one-time setup):
+  documents/ → <span class="arch-step">loader.py</span> → <span class="arch-step">chunker.py</span> → <span class="arch-step">embedder.py</span> → chroma_db/
+     PDFs/TXT     Load text      Split into       Convert to      Vector DB
+                  + metadata     ~500 char        768-dim         (persistent)
+                                 chunks w/         vectors via       overlap        Ollama
+
+<span class="arch-step">ASK</span> (per question):
+  Question → <span class="arch-step">embedder.py</span> → <span class="arch-step">retriever.py</span> → <span class="arch-step">generator.py</span> → Answer + Citations
+  "What is   Convert question  Search Chroma     Send context +    "Revenue is
+   revenue?"  to vector         for top 5          question to       Rs 45 lakhs
+              (same model)      similar chunks     GLM-5.2 LLM       (Source: report)"
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📦 The 7 Modules</h2>
+            <div class="modules">
+                <div class="module">
+                    <div class="num">1</div>
+                    <div class="name">Loader</div>
+                    <div class="file">loader.py</div>
+                    <div class="desc">Reads PDFs (PyMuPDF) and text files. Keeps page metadata for citations.</div>
+                </div>
+                <div class="module">
+                    <div class="num">2</div>
+                    <div class="name">Chunker</div>
+                    <div class="file">chunker.py</div>
+                    <div class="desc">Splits documents into ~500 char pieces with 50 char overlap to preserve context at boundaries.</div>
+                </div>
+                <div class="module">
+                    <div class="num">3</div>
+                    <div class="name">Embedder</div>
+                    <div class="file">embedder.py</div>
+                    <div class="desc">Converts text → 768-dim vectors using Ollama nomic-embed-text. Stores in Chroma.</div>
+                </div>
+                <div class="module">
+                    <div class="num">4</div>
+                    <div class="name">Retriever</div>
+                    <div class="file">retriever.py</div>
+                    <div class="desc">Embeds the question, searches Chroma for top 5 most similar chunks by meaning.</div>
+                </div>
+                <div class="module">
+                    <div class="num">5</div>
+                    <div class="name">Generator</div>
+                    <div class="file">generator.py</div>
+                    <div class="desc">GLM-5.2 Cloud answers FROM retrieved context with source citations. No hallucination.</div>
+                </div>
+                <div class="module">
+                    <div class="num">6</div>
+                    <div class="name">CLI Interface</div>
+                    <div class="file">main.py</div>
+                    <div class="desc">Terminal commands: ingest documents, ask questions, interactive mode.</div>
+                </div>
+                <div class="module">
+                    <div class="num">7</div>
+                    <div class="name">Web App</div>
+                    <div class="file">web_app.py</div>
+                    <div class="desc">FastAPI browser UI with beautiful chat interface and streaming responses.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧠 Key Concepts for Students</h2>
+
+            <div class="concept">
+                <strong>Why chunking?</strong> A 50-page PDF as one vector = a "blur" — close to everything, specific to nothing. Breaking into ~500 char chunks makes search precise. Each chunk covers one topic, so "revenue" chunks are separate from "hiring" chunks.
+            </div>
+
+            <div class="concept">
+                <strong>Why overlap?</strong> If you cut at exactly 500 chars, you might split a sentence: "...revenue is based on" | "subscription fees...". The answer is at the boundary. Overlap (50 chars) ensures boundary info survives in both chunks.
+            </div>
+
+            <div class="concept">
+                <strong>Why embeddings?</strong> Computers can't "search" text. Embeddings convert text to numbers where similar MEANING = similar numbers. "Revenue" and "money" have similar vectors even though they're different words. This is semantic search.
+            </div>
+
+            <div class="concept">
+                <strong>Why "answer only from context"?</strong> Without this instruction, the LLM mixes its training data with your documents and hallucinates. The system prompt forces it to answer from retrieved chunks only — and cite sources. This is what makes RAG reliable.
+            </div>
+
+            <div class="concept">
+                <strong>Why same embedding model for questions and docs?</strong> If documents use model A and questions use model B, the vectors live in different "spaces" — similarity search is meaningless. Same model = same space = meaningful search.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Quick Start</h2>
+            <div class="code-block">
+<span class="comment"># 1. Clone the repo</span>
+git clone https://github.com/nagarjunak-pixel/rag-chat-docs.git
+cd rag-chat-docs
+
+<span class="comment"># 2. Set up virtual environment</span>
+python3 -m venv venv
+source venv/bin/activate
+pip install chromadb pymupdf requests fastapi
+
+<span class="comment"># 3. Make sure Ollama is running with embedding model</span>
+ollama pull nomic-embed-text
+ollama serve  <span class="comment"># if not already running</span>
+
+<span class="comment"># 4. Add your documents</span>
+<span class="comment"># Put .pdf or .txt files in the documents/ folder</span>
+
+<span class="comment"># 5. Ingest — embed documents into vector DB (one-time)</span>
+cd app
+python main.py ingest
+
+<span class="comment"># 6. Ask questions (CLI)</span>
+python main.py ask "What is the revenue model?"
+
+<span class="comment"># 7. Or launch the web app</span>
+python web_app.py
+<span class="comment"># Open http://localhost:8000 in browser</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Tech Stack</h2>
+            <div class="modules">
+                <div class="module">
+                    <div class="name">Embedding Model</div>
+                    <div class="desc">Ollama nomic-embed-text — runs locally, free, produces 768-dimensional vectors</div>
+                </div>
+                <div class="module">
+                    <div class="name">Vector Database</div>
+                    <div class="desc">Chroma — file-based, zero infrastructure, stores vectors + metadata + text together</div>
+                </div>
+                <div class="module">
+                    <div class="name">LLM</div>
+                    <div class="desc">GLM-5.2 Cloud via OpenAI-compatible proxy — no API key needed, no rate limits</div>
+                </div>
+                <div class="module">
+                    <div class="name">PDF Parsing</div>
+                    <div class="desc">PyMuPDF (fitz) — fast, reliable, page-level text extraction with metadata</div>
+                </div>
+                <div class="module">
+                    <div class="name">Web Framework</div>
+                    <div class="desc">FastAPI — async, fast, built-in interactive API docs at /docs</div>
+                </div>
+                <div class="module">
+                    <div class="name">Frontend</div>
+                    <div class="desc">Single HTML file with CSS/JS — no React, no build step, easy for students to modify</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Built for <a href="#">Surya Agentic Academy</a> — Teaching AI Engineering from scratch</p>
+        <p style="margin-top: 10px; color: #444;">Every module has extensive comments explaining WHY each step exists, not just what it does.</p>
+    </div>
+</body>
+</html>
