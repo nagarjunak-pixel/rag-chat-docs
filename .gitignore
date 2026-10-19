@@ -4,3 +4,12 @@ __pycache__/
 *.pyc
 .DS_Store
 *.log
+
+# Private settings - never commit (added 2026-10-19)
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Python virtual environment - never commit (added 2026-10-19)
+.venv/
